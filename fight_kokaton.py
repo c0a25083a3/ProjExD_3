@@ -155,15 +155,15 @@ class Explosion:
     爆発エフェクト
     """
     def __init__(self, xy: tuple[int, int]):
-        img = pg.image.load("fig/explosion.gif")
+        img = pg.image.load("fig/explosion.gif") #爆破画像と反転した画像の用意
         img1 = pg.transform.flip(img, True, True)
         self.imgs = [img, img1]
-        self.rct = img.get_rect()
+        self.rct = img.get_rect() #表示時間の設定
         self.rct.center = xy
         self.life = 10
 
     def update(self, screen: pg.Surface):
-        self.life -= 1
+        self.life -= 1 #表示時間を減らして画像を切り替え
         if self.life > 0:
             img = self.imgs[(self.life // 3) % 2]
             screen.blit(img, self.rct)
@@ -189,7 +189,7 @@ def main():
     bird = Bird((300, 200))
     #bomb = Bomb((255, 0, 0), 10)
     bombs = [Bomb((255,0,0),10) for _ in range(NUM_OF_BOMBS)]    
-    beams = []
+    beams = [] #空リストの用意
     explosions = []
     score = Score()
     clock = pg.time.Clock()
